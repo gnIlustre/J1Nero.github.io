@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>About Us - Roam Radar</title>
+</head>
+<body>
+    <!-- Nav Bar -->
+    <header class="header">
+        <div class="container">
+            <img src="images/logo.png" alt="Company Logo" class="logo">
+            <nav class="navbar">
+                <ul class="menu">
+                    <li class="navitem1">
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li class="navitem2">
+                        <a href="discover.html" class="discover-link">Discover</a>
+                        <ul class="dropdown">
+                            <li><a href="location.html">Week's Top 1</a></li>
+                            <li><a href="#">Article of the Day</a></li>
+                        </ul>
+                    </li>
+                    <li class="navitem3">
+                        <a href="plan.html">Plan</a>
+                    </li>
+                    <li class="navitem4">
+                        <a href="register.html">Register</a>
+                    </li>
+                    <li class="navitem5">
+                        <a href="review.html">Review</a>
+                    </li>
+                    <li class="active navitem6">
+                        <a href="aboutus.html">About Us</a>
+                    </li>
+                </ul>
+                <div class="hamburger">
+                    &#9776; 
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="abcontainer">
+        <div class="abmain-content">
+            <div class="abcarousel">
+                <div class="abcarousel-wrapper">
+                    <div class="abcarousel-images">
+                        <img src="images/office1.jpg" alt="Image 1">
+                        <img src="images/office2.jpg" alt="Image 2">
+                        <img src="images/office3.jpg" alt="Image 3">
+                    </div>
+                </div>
+
+                <button class="abcarousel-button prev">‹</button>
+                <button class="abcarousel-button next">›</button>
+                <div class="abcarousel-indicators">
+                    <span class="abdot"></span>
+                    <span class="abdot"></span>
+                    <span class="abdot"></span>
+                </div>
+            </div>
+
+            <div class="abtext">
+                <section class="abheader">
+                    <h1>All About Us</h1>
+                </section>
+                <section class="aboutcom">
+                    <div class="abs">
+                        <p>Roam Radar was created for travelers who crave genuine, 
+                        insider insights and personalized recommendations to make 
+                        every journey unforgettable. With Roam Radar, travelers have 
+                        access to a dynamic platform blending trusted reviews and curated 
+                        recommendations for destinations worldwide, from hidden local gems 
+                        to popular hotspots. We aim to be the go-to guide for travelers who 
+                        want more than the tourist experience, bringing together a community 
+                        of explorers who share honest experiences, tips, and feedback. Whether 
+                        you’re a foodie looking for the best local eats or a cultural enthusiast 
+                        seeking unique sights, Roam Radar helps you discover places tailored to 
+                        your tastes and interests.<br><br>  
+
+                        Driven by the belief that travel should be enriching and unique, 
+                        Roam Radar offers a streamlined experience that’s both reliable and 
+                        user-friendly. With features like location-based suggestions, real-time 
+                        updates, and personalized trip planning tools, Roam Radar goes beyond 
+                        typical reviews, making it easy for users to find exactly what they’re 
+                        looking for wherever they roam. As a trusted source in the travel community, 
+                        Roam Radar is here to inspire curiosity, connect travelers with authentic 
+                        experiences, and make every adventure extraordinary.</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="fcontainer">
+            <p class="gmail">Contact Us at: <a href="mailto:roamradar@gmail.com">roamradar@gmail.com</a></p>
+            <p class="reserve">&copy; 2024 RoamRadar. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Next Image Script -->
+    <script>
+        const images = document.querySelectorAll('.abcarousel-images img');
+        let currentIndex = 0;
+
+        document.querySelector('.next').addEventListener('click', () => {
+            if (currentIndex < images.length - 1) {
+                currentIndex++;
+            } else {
+                currentIndex = 0; 
+            }
+        document.querySelector('.abcarousel-wrapper').style.transform = `translateX(-${currentIndex * 100}%)`;
+        });
+
+        document.querySelector('.prev').addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+            } else {
+                currentIndex = images.length - 1; 
+            }
+            document.querySelector('.abcarousel-wrapper').style.transform = `translateX(-${currentIndex * 100}%)`;
+        });
+    </script>
+
+    <!-- Mobile Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const menu = document.querySelector('.navbar .menu');
+            const discoverItem = document.querySelector('.discover-link');
+            const dropdown = discoverItem.nextElementSibling;
+
+            function handleMobileView() {
+                if (window.innerWidth <= 768) { 
+                    hamburger.addEventListener('click', function() {
+                        menu.classList.toggle('active');
+                        localStorage.setItem('menuActive', menu.classList.contains('active'));
+                    });
+
+                    discoverItem.addEventListener('click', function(event) {
+                        event.preventDefault();
+
+                        if (dropdown.classList.contains('active')) {
+                            dropdown.classList.remove('active');
+                        } else {
+                            dropdown.classList.add('active');
+                        }
+
+                        setTimeout(() => {
+                            if (!dropdown.classList.contains('active')) {
+                                window.location.href = 'discover.html';
+                            }
+                        }, 300);
+                    });
+                }
+            }
+
+            handleMobileView();
+
+            window.addEventListener('resize', function() {
+                if (window.innerWidth <= 768) {
+                    handleMobileView();
+                } else {
+                    hamburger.removeEventListener('click', handleMobileView);
+                    discoverItem.removeEventListener('click', handleMobileView);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

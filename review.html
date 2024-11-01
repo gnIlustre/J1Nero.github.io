@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Review - Roam Radar</title>
+</head>
+<body>
+    <!-- Nav Bar -->
+    <header class="header">
+        <div class="container">
+            <img src="images/logo.png" alt="Company Logo" class="logo">
+            <nav class="navbar">
+                <ul class="menu">
+                    <li class="navitem1">
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li class="navitem2">
+                        <a href="discover.html" class="discover-link">Discover</a>
+                        <ul class="dropdown">
+                            <li><a href="location.html">Week's Top 1</a></li>
+                            <li><a href="#">Article of the Day</a></li>
+                        </ul>
+                    </li>
+                    <li class="navitem3">
+                        <a href="plan.html">Plan</a>
+                    </li>
+                    <li class="navitem4">
+                        <a href="register.html">Register</a>
+                    </li>
+                    <li class="active navitem5">
+                        <a href="review.html">Review</a>
+                    </li>
+                    <li class="navitem6">
+                        <a href="aboutus.html">About Us</a>
+                    </li>
+                </ul>
+                <div class="hamburger">
+                    &#9776; 
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="rwebpage">
+        <main class="review-page">
+            <h1>Leave a Review</h1>
+            <section class="location-list">
+                <div class="location-item">
+                    <div class="location-name">McDonald's Taradale</div>
+                    <button class="rate-btn">Rate Me</button>
+                </div>
+                <div class="location-item">
+                    <div class="location-name">KFC Napier</div>
+                    <button class="rate-btn">Rate Me</button>
+                </div>
+                <div class="location-item">
+                    <div class="location-name">Shani's</div>
+                    <button class="rate-btn">Rate Me</button>
+                </div>
+            </section>
+    
+            <section class="review-form">
+                <h2>Submit Your Review</h2>
+                <form action="#">
+                    <label for="location">Location:</label>
+                    <input type="text" id="location" name="location" placeholder="Enter location name" required>
+                    
+                    <label for="rating">Rating:</label>
+                    <select id="rating" name="rating" required>
+                        <option value="5">★★★★★</option>
+                        <option value="4">★★★★</option>
+                        <option value="3">★★★</option>
+                        <option value="2">★★</option>
+                        <option value="1">★</option>
+                    </select>
+                    
+                    <label for="review">Review:</label>
+                    <textarea id="review" name="review" rows="4" placeholder="Write your review here..." required></textarea>
+                    
+                    <button type="submit" class="submit-btn">Submit Review</button>
+                </form>
+            </section>
+        </main>
+    </div>
+    <footer class="footer">
+        <div class="fcontainer">
+            <p class="gmail">Contact Us at: <a href="mailto:roamradar@gmail.com">roamradar@gmail.com</a></p>
+            <p class="reserve">&copy; 2024 RoamRadar. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Mobile Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const menu = document.querySelector('.navbar .menu');
+            const discoverItem = document.querySelector('.discover-link');
+            const dropdown = discoverItem.nextElementSibling;
+
+            function handleMobileView() {
+                if (window.innerWidth <= 768) { 
+                    hamburger.addEventListener('click', function() {
+                        menu.classList.toggle('active');
+                        localStorage.setItem('menuActive', menu.classList.contains('active'));
+                    });
+
+                    discoverItem.addEventListener('click', function(event) {
+                        event.preventDefault();
+
+                        if (dropdown.classList.contains('active')) {
+                            dropdown.classList.remove('active');
+                        } else {
+                            dropdown.classList.add('active');
+                        }
+
+                        setTimeout(() => {
+                            if (!dropdown.classList.contains('active')) {
+                                window.location.href = 'discover.html';
+                            }
+                        }, 300);
+                    });
+                }
+            }
+
+            handleMobileView();
+
+            window.addEventListener('resize', function() {
+                if (window.innerWidth <= 768) {
+                    handleMobileView();
+                } else {
+                    hamburger.removeEventListener('click', handleMobileView);
+                    discoverItem.removeEventListener('click', handleMobileView);
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

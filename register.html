@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Register - Roam Radar</title>
+</head>
+<body>
+    <!-- Nav Bar -->
+    <header class="header">
+        <div class="container">
+            <img src="images/logo.png" alt="Company Logo" class="logo">
+            <nav class="navbar">
+                <ul class="menu">
+                    <li class="navitem1">
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li class="navitem2">
+                        <a href="discover.html" class="discover-link">Discover</a>
+                        <ul class="dropdown">
+                            <li><a href="location.html">Week's Top 1</a></li>
+                            <li><a href="#">Article of the Day</a></li>
+                        </ul>
+                    </li>
+                    <li class="navitem3">
+                        <a href="plan.html">Plan</a>
+                    </li>
+                    <li class="active navitem4">
+                        <a href="register.html">Register</a>
+                    </li>
+                    <li class="navitem5">
+                        <a href="review.html">Review</a>
+                    </li>
+                    <li class="navitem6">
+                        <a href="aboutus.html">About Us</a>
+                    </li>
+                </ul>
+                <div class="hamburger">
+                    &#9776; 
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="rmaincontent">
+        <div class="slideshow-container">
+            <div class="slide fade">
+                <img src="images/discover.jpg" style="width:50%">
+            </div>
+        
+            <div class="slide fade">
+                <img src="images/home.jpg" style="width:50%">
+            </div>
+        
+            <div class="slide fade">
+                <img src="images/cheese.jpg" style="width:50%">
+            </div>
+
+            <div class="slide fade">
+                <img src="images/oak.jpg" style="width:50%">
+            </div>
+
+            <div class="slide fade">
+                <img src="images/bar.jpg" style="width:50%">
+            </div>
+        </div>
+
+        <div class="reg-form-container">
+            <div class="form-header">
+                <h2>Register Your Location</h2>
+            </div>
+            <form class="reg-form" onsubmit="handleSubmit(event)">
+                <label for="business-name">Business name</label>
+                <input type="text" id="business-name" name="business-name" required>
+
+                <label for="location">Location</label>
+                <input type="text" id="location" name="location" required>
+
+                <label for="category">Category</label>
+                <select id="category" name="category" required>
+                    <option value="">Select a category</option>
+                    <option value="restaurant">Restaurant</option>
+                    <option value="hotel">Hotel</option>
+                    <option value="cafe">Cafe</option>
+                    <option value="bar">Bar</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="children">Children's</option>
+                </select>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+
+                <button type="submit" class="reg-btn">Register</button>
+                <p class="note">*You will receive an email within 5-7 working days to confirm and fully register your business.</p>
+            </form>
+            <p id="form-success" style="display:none; color:green;">Your registration was successful!</p>
+            <p id="form-error" style="display:none; color:red;">There was an error submitting the form. Please try again.</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="fcontainer">
+            <p class="gmail">Contact Us at: <a href="mailto:roamradar@gmail.com">roamradar@gmail.com</a></p>
+            <p>&copy; 2024 RoamRadar. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Overflow and fixes -->
+    <style>
+        body, html {
+            max-width: 210vh;
+        }
+
+        @media (max-width: 768px) {
+            body, html {
+                margin: 0;
+                padding: 0;
+                overflow-x: hidden;
+            }
+        }
+    </style>
+
+    <!-- Slideshow Script -->
+    <script>
+        let slideIndex = 0;
+        showSlides();
+        
+        function showSlides() {
+          let i;
+          let slides = document.getElementsByClassName("slide");
+          for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";  
+          }
+          slideIndex++;
+          if (slideIndex > slides.length) {slideIndex = 1}    
+          slides[slideIndex-1].style.display = "block";  
+          setTimeout(showSlides, 4000); 
+        }
+    </script>
+
+    <!-- Entry Error Script -->
+    <script>
+        function handleSubmit(event) {
+          event.preventDefault();
+          
+          const isSuccess = Math.random() > 0.5; 
+          
+          if (isSuccess) {
+            document.getElementById('form-success').style.display = 'block';
+            document.getElementById('form-error').style.display = 'none';
+          } else {
+            document.getElementById('form-error').style.display = 'block';
+            document.getElementById('form-success').style.display = 'none';
+          }
+        }
+    </script>
+
+
+    <!-- Mobile Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const menu = document.querySelector('.navbar .menu');
+            const discoverItem = document.querySelector('.discover-link');
+            const dropdown = discoverItem.nextElementSibling;
+
+            function handleMobileView() {
+                if (window.innerWidth <= 768) { 
+                    hamburger.addEventListener('click', function() {
+                        menu.classList.toggle('active');
+                        localStorage.setItem('menuActive', menu.classList.contains('active'));
+                    });
+
+                    discoverItem.addEventListener('click', function(event) {
+                        event.preventDefault();
+    
+                        if (dropdown.classList.contains('active')) {
+                            dropdown.classList.remove('active');
+                        } else {
+                            dropdown.classList.add('active');
+                        }
+    
+                        setTimeout(() => {
+                            if (!dropdown.classList.contains('active')) {
+                                window.location.href = 'discover.html';
+                            }
+                        }, 300);
+                    });
+                }
+            }
+
+            handleMobileView();
+
+            window.addEventListener('resize', function() {
+                if (window.innerWidth <= 768) {
+                    handleMobileView();
+                } else {
+                    hamburger.removeEventListener('click', handleMobileView);
+                    discoverItem.removeEventListener('click', handleMobileView);
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
